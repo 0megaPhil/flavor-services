@@ -1,12 +1,13 @@
-from rest_framework import serializers
-
 from flavor_services import entities
 
 
 class Flavor(entities.Object):
 
-    def __init__(self, uuid, object_type, text):
+    def __init__(self, uuid, object_type, **kwargs):
         super().__init__()
-        self.targetId = uuid
-        self.objectType = object_type
-        self.text = text
+        self.target_id = uuid
+        self.object_type = object_type
+        self.appearance = kwargs.get('appearance')
+        self.background = kwargs.get('background')
+        self.personality = kwargs.get('personality')
+        self.summary = kwargs.get('summary')
