@@ -6,7 +6,7 @@ from flavor_services.views import FlavorApiView, FlavorFactory
 
 class RaceApiView(FlavorApiView):
     def __init__(self, **kwargs):
-        super().__init__(FlavorFactory(RaceInput), **kwargs)
+        super().__init__(FlavorFactory(RaceInput()), **kwargs)
 
     def post(self, request: Request):
         return self.post_resolver(request)

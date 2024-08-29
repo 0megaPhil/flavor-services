@@ -6,7 +6,7 @@ from flavor_services.views import FlavorFactory, FlavorApiView
 
 class EffectApiView(FlavorApiView):
     def __init__(self, **kwargs):
-        super().__init__(FlavorFactory(EffectInput), **kwargs)
+        super().__init__(FlavorFactory(EffectInput()), **kwargs)
 
     def post(self, request: Request):
         return self.post_resolver(request)

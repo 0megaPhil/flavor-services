@@ -29,10 +29,12 @@ class FlavorApiView(APIView):
         self.flavor.characteristics.clear()
         body_dict: dict = request.data
         print(body_dict)
-        entity = self.entity_type.from_dict(dict_to_snake(body_dict))
+        req_snake = dict_to_snake(body_dict)
+        entity: CommonObject = self.entity_type.from_dict(req_snake)
+        target_id = entity.get_id()
         detail_entities = self.detail_entities(entity)
         if detail_entities is not None and len(detail_entities) > 0:
-            flavor = self.generate_flavor(entity.id, detail_entities)
+            flavor = self.generate_flavor(target_id, detail_entities)
         else:
             flavor = FlavorInput
         json_str = schema_dumps(flavor)
@@ -40,10 +42,9 @@ class FlavorApiView(APIView):
         return HttpResponse(camel_json)
 
     def generate_flavor(self, target_id: str, entities: List[CommonObject]):
-        for detail in entities:
-            self.flavor.initialize_prompt(detail)
-        self.flavor.start_all()
-        self.flavor.join_all()
+        self.flavor.initialize_all(target_id, entities)
+        self.flavor.start_all(target_id)
+        self.flavor.join_all(target_id)
         flavor = self.flavor.complete_flavor(target_id)
         print(flavor)
         return flavor

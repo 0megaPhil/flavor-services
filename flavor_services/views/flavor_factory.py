@@ -10,7 +10,7 @@ class FlavorFactory:
     # Singleton
     generator: LlamaGeneration = LlamaGeneration()
     _char_dict: Dict[str, List[CharacteristicInput]] = {}
-    threads: List[threading.Thread] = []
+    id_threads: Dict[str, List[threading.Thread]] = {}
     entity_type: CommonObject
 
     def __init__(self, entity_type: CommonObject,
@@ -44,9 +44,9 @@ class FlavorFactory:
         print("Summary Prompt: " + str(messages))
         return messages
 
-    def initialize_prompt(self, entity: CommonObject):
-        prompt = self.get_detail_prompt(entity)
-        self._initialize(prompt)
+    def add_entity(self, target_id: str, entity: CommonObject):
+        prompt = self._get_detail_prompt(entity)
+        self._add_thread(target_id, prompt)
 
     def complete_flavor(self, target_id: str):
         for characteristic in self.characteristics:
@@ -63,7 +63,13 @@ class FlavorFactory:
 
         return flavor
 
-    def get_detail_prompt(self, entity: CommonObject):
+    def _get_detail_prompt(self, entity: CommonObject):
+        additional = ""
+        if hasattr(entity, "magnitude"):
+            additional = f"Please note that this is {entity.magnitude} when compared to others. "
+        if hasattr(entity, "rarity"):
+            additional = f"Please note that rarity is {entity.rarity} when compared to others. "
+
         title = entity.get_title()
         obj_json = entity.__str__()
         print(f"Title: {title} - Detail {obj_json}")
@@ -75,6 +81,7 @@ class FlavorFactory:
                        '    "description": String'
                        '}'
                        ' If there is a "type" field, include that in the "title"'
+                       f' {additional}'
                        ' Prefix the generated json with <json> and suffix the generated json with </json>')
 
         messages = [
@@ -100,15 +107,29 @@ class FlavorFactory:
             except Exception as e:
                 print(e)
 
-    def _initialize(self, prompt):
-        self.threads.append(threading.Thread(target=self._generate_characteristic, args=(prompt,)))
+    def _get_id_threads(self, target_id: str):
+        if target_id not in self.id_threads.keys():
+            print("No entities initialized")
+            self.id_threads[target_id] = []
+        return self.id_threads[target_id]
 
-    def start_all(self):
-        for thread in self.threads:
+    def start_all(self, target_id: str):
+        for thread in self._get_id_threads(target_id):
             print(f"Start Thread for: {self.entity_name}")
             thread.start()
 
-    def join_all(self):
-        for thread in self.threads:
-            print(f"Join Thread for: {self.entity_name}")
-            self.threads.pop().join()
+    def join_all(self, target_id: str):
+        try:
+            for thread in self._get_id_threads(target_id):
+                print(f"Join Thread for: {self.entity_name}")
+                self._get_id_threads(target_id).pop().join()
+        finally:
+            self.id_threads.pop(target_id, None)
+
+    def initialize_all(self, target_id: str, entities: [CommonObject]):
+        for entity in entities:
+            prompt = self._get_detail_prompt(entity)
+            self._add_thread(target_id, prompt)
+
+    def _add_thread(self, target_id: str, prompt):
+        self._get_id_threads(target_id).append(threading.Thread(target=self._generate_characteristic, args=(prompt,)))
