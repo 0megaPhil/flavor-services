@@ -16,9 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views.flavor_api_view import FlavorCharacterApiView
+
+from .views.flavor_attribute_view import AttributeApiView
+from .views.flavor_effect_view import EffectApiView
+from .views.flavor_player_view import PlayerApiView
+from .views.flavor_race_view import RaceApiView
+from .views.flavor_skill_view import SkillApiView
+from .views.flavor_stat_view import StatApiView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('flavor/character', FlavorCharacterApiView.as_view()),
+    path('flavor/player', PlayerApiView.as_view()),
+    path('flavor/attribute', AttributeApiView.as_view()),
+    path('flavor/effect', EffectApiView.as_view()),
+    path('flavor/race', RaceApiView.as_view()),
+    path('flavor/skill', SkillApiView.as_view()),
+    path('flavor/stat', StatApiView.as_view()),
 ]
