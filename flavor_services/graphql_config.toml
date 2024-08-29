@@ -1,0 +1,7 @@
+[tool.ariadne-codegen]
+schema_path = "flavor_services/introspection.json.graphql"
+queries_path  = "flavor_services/queries.graphql"
+include_comments = "none"
+target_package_name = "games_services_client"
+enable_custom_operations = true
+types = []

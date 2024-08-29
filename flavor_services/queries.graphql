@@ -1,0 +1,13 @@
+mutation CreatePlayer {
+    createPlayer {
+        id
+        name
+        stats {
+            stat {
+                id
+                name
+            }
+            value
+        }
+    }
+}

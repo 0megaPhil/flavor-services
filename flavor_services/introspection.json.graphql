@@ -1,0 +1,802 @@
+"""Indicates an Input Object is a OneOf Input Object."""
+directive @oneOf on INPUT_OBJECT
+
+"""
+CommonEntity inheritors are static and used to generated data model
+This is to be used for more complex domain model exposures
+"""
+interface CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+interface CommonObject {
+    objectType: String
+}
+
+interface CommonValue {
+    value: Float
+}
+
+type Attribute implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String
+    prompt: String
+    type: Attributes!
+    updated: DateTime
+    version: Int
+}
+
+type Characteristic implements CommonValue {
+    description: String
+    title: String!
+    value: Float!
+}
+
+type Creature implements CommonEntity {
+    attributes: [PlayerAttribute]
+    created: DateTime
+    dimensions: [Dimension]
+    effects: [PlayerEffect]
+    error: Error
+    flavor: Flavor
+    id: String
+    inventory: Inventory
+    name: String!
+    profession: Profession
+    prompt: String
+    sex: Sexes
+    skills: [PlayerSkill]
+    stats: [PlayerStat]
+    type: Species!
+    updated: DateTime
+    version: Int
+}
+
+type Currency implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String!
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+type Dimension implements CommonValue {
+    title: String!
+    unitType: String!
+    value: Float!
+}
+
+type Effect implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String
+    prompt: String
+    type: Effects!
+    updated: DateTime
+    version: Int
+}
+
+type Error implements CommonObject {
+    data: String
+    errorCode: Int
+    headers: String
+    message: String
+    objectType: String
+    params: String
+    path: String
+    title: String
+    type: ErrorTypes
+}
+
+type ErrorResponse implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    headers: String
+    id: String
+    method: String
+    params: String
+    path: String
+    prompt: String
+    queryId: String
+    updated: DateTime
+    uri: String
+    version: Int
+}
+
+type Flavor implements CommonObject {
+    characteristics: [Characteristic]!
+    objectType: String!
+    summary: String!
+    targetId: String!
+}
+
+type Inventory implements CommonEntity {
+    created: DateTime
+    currencies: [InventoryCurrency]
+    error: Error
+    flavor: Flavor
+    id: String
+    items: [InventoryItem]
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+type InventoryCurrency implements CommonValue {
+    currency: Currency!
+    value: Float!
+}
+
+type InventoryItem implements CommonValue {
+    item: Item!
+    value: Float!
+}
+
+type Item implements CommonEntity {
+    created: DateTime
+    dimensions: [Dimension]
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String!
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+type Mutation {
+    createCreature(input: CreatureInput): Creature
+    createCurrency(input: CurrencyInput): Currency
+    createInventory(input: InventoryInput): Inventory
+    createItem(input: ItemInput): Item
+    createPlayer(input: PlayerInput): Player
+    createProfession(input: ProfessionInput): Profession
+    createRace(input: RaceInput): Race
+    createSkill(input: SkillInput): Skill
+    createStat(input: StatInput): Stat
+    createTerrain(input: TerrainInput): Terrain
+    createTransaction(input: TransactionInput): Transaction
+    createUser(input: UserInput): User
+    createWorld(input: WorldInput): World
+    deleteCreature(id: String): Boolean
+    deleteCurrency(id: String): Boolean
+    deleteInventory(id: String): Boolean
+    deleteItem(id: String): Boolean
+    deletePlayer(id: String): Boolean
+    deleteProfession(id: String): Boolean
+    deleteRace(id: String): Boolean
+    deleteSkill(id: String): Boolean
+    deleteStat(id: String): Boolean
+    deleteTerrain(id: String): Boolean
+    deleteTransaction(id: String): Boolean
+    deleteUser(id: String): Boolean
+    deleteWorld(id: String): Boolean
+    flavorCreature(id: String): Creature
+    flavorCurrency(id: String): Currency
+    flavorInventory(id: String): Inventory
+    flavorItem(id: String): Item
+    flavorPlayer(id: String): Player
+    flavorProfession(id: String): Profession
+    flavorRace(id: String): Race
+    flavorSkill(id: String): Skill
+    flavorStat(id: String): Stat
+    flavorTerrain(id: String): Terrain
+    flavorTransaction(id: String): Transaction
+    flavorUser(id: String): User
+    flavorWorld(id: String): World
+    updateCreature(input: CreatureInput): Creature
+    updateCurrency(input: CurrencyInput): Currency
+    updateInventory(input: InventoryInput): Inventory
+    updateItem(input: ItemInput): Item
+    updatePlayer(input: PlayerInput): Player
+    updateProfession(input: ProfessionInput): Profession
+    updateRace(input: RaceInput): Race
+    updateSkill(input: SkillInput): Skill
+    updateStat(input: StatInput): Stat
+    updateTerrain(input: TerrainInput): Terrain
+    updateTransaction(input: TransactionInput): Transaction
+    updateUser(input: UserInput): User
+    updateWorld(input: WorldInput): World
+}
+
+type NPC implements CommonEntity {
+    attributes: [PlayerAttribute]
+    created: DateTime
+    dimensions: [Dimension]
+    effects: [PlayerEffect]
+    error: Error
+    flavor: Flavor
+    id: String
+    inventory: Inventory
+    name: String
+    profession: Profession
+    prompt: String
+    race: Race
+    sex: Sexes
+    skills: [PlayerSkill]
+    stats: [PlayerStat]
+    updated: DateTime
+    user: User
+    version: Int
+}
+
+type Player implements CommonEntity {
+    attributes: [PlayerAttribute]
+    created: DateTime
+    dimensions: [Dimension]
+    effects: [PlayerEffect]
+    error: Error
+    flavor: Flavor
+    id: String
+    inventory: Inventory
+    name: String
+    profession: Profession
+    prompt: String
+    race: Race
+    sex: Sexes
+    skills: [PlayerSkill]
+    stats: [PlayerStat]
+    updated: DateTime
+    user: User
+    version: Int
+}
+
+type PlayerAttribute implements CommonValue {
+    attribute: Attribute
+    value: Float!
+}
+
+type PlayerEffect implements CommonValue {
+    effect: Effect!
+    value: Float!
+}
+
+type PlayerSkill implements CommonValue {
+    skill: Skill!
+    value: Float!
+}
+
+type PlayerStat implements CommonValue {
+    stat: Stat!
+    value: Float!
+}
+
+type Profession implements CommonEntity {
+    attributes: [PlayerAttribute]
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String!
+    prompt: String
+    skills: [PlayerSkill]
+    stats: [PlayerStat]
+    type: Professions
+    updated: DateTime
+    version: Int
+}
+
+type Query {
+    findCreature(options: Options): [Creature]
+    findCurrency(options: Options): [Currency]
+    findInventory(options: Options): [Inventory]
+    findItem(options: Options): [Item]
+    findPlayer(options: Options): [Player]
+    findProfession(options: Options): [Profession]
+    findRace(options: Options): [Race]
+    findSkill(options: Options): [Skill]
+    findStat(options: Options): [Stat]
+    findTerrain(options: Options): [Terrain]
+    findTransaction(options: Options): [Transaction]
+    findUser(options: Options): [User]
+    findWorld(options: Options): [World]
+    getCreature(id: String): Creature
+    getCurrency(id: String): Currency
+    getInventory(id: String): Inventory
+    getItem(id: String): Item
+    getPlayer(id: String): Player
+    getProfession(id: String): Profession
+    getRace(id: String): Race
+    getSkill(id: String): Skill
+    getStat(id: String): Stat
+    getTerrain(id: String): Terrain
+    getTransaction(id: String): Transaction
+    getUser(id: String): User
+    getWorld(id: String): World
+}
+
+type Race implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String!
+    prompt: String
+    type: Species!
+    updated: DateTime
+    version: Int
+}
+
+type Skill implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String
+    prompt: String
+    type: Skills!
+    updated: DateTime
+    version: Int
+}
+
+type Stat implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String
+    prompt: String
+    type: Stats!
+    updated: DateTime
+    version: Int
+}
+
+type Terrain implements CommonEntity {
+    created: DateTime
+    effects: [TerrainEffect]
+    error: Error
+    flavor: Flavor
+    id: String
+    name: String!
+    prompt: String
+    type: String!
+    updated: DateTime
+    version: Int
+}
+
+type TerrainEffect implements CommonValue {
+    effect: Effect!
+    value: Float!
+}
+
+type Transaction implements CommonEntity {
+    created: DateTime
+    currency: String
+    error: Error
+    flavor: Flavor
+    id: String
+    inventoryId: String!
+    item: String
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+type User implements CommonEntity {
+    created: DateTime
+    email: String!
+    error: Error
+    firstName: String!
+    flavor: Flavor
+    id: String
+    lastName: String!
+    prompt: String
+    updated: DateTime
+    version: Int
+}
+
+type World implements CommonEntity {
+    created: DateTime
+    error: Error
+    flavor: Flavor
+    id: String
+    magicLevel: MagicLevels
+    name: String!
+    prompt: String
+    races: [Race]
+    techLevel: TechLevels
+    terrains: [Terrain]
+    type: String!
+    updated: DateTime
+    version: Int
+}
+
+enum Attributes {
+    ENERGY
+    HEALTH
+    MANA
+    OTHER
+    SANITY
+}
+
+enum Effects {
+    ATTRIBUTE
+    CHARACTERISTIC
+    DIMENSION
+    OTHER
+    SKILL
+    STAT
+    STATUS
+}
+
+enum ErrorTypes {
+    FLAVOR
+    GRAPHQL
+    INTERNAL
+    MONGODB
+    OTHER
+    WEB
+}
+
+enum Events {
+    CHARACTER
+    COMBAT
+    DIALOG
+    ECONOMIC
+    PARTY_CHANGE
+    POLITICAL
+    TRANSACTION
+}
+
+enum MagicLevels {
+    HIGH_MAGIC
+    INHERENT_MAGIC
+    LOW_MAGIC
+    MODERATE_MAGIC
+    NO_MAGIC
+}
+
+enum Operations {
+    CREATE_MANY
+    CREATE_ONE
+    DELETE_BY_ID
+    DELETE_BY_IDS
+    DELETE_ONE
+    FIND_ALL_LIKE
+    FIND_BY_ID
+    FIND_BY_IDS
+    FIND_ONE_LIKE
+    UPDATE_MANY
+    UPDATE_ONE
+}
+
+enum Professions {
+    COMBAT
+    MILITARY
+    OTHER
+    POLITICAL
+    RELIGIOUS
+    UTILITY
+}
+
+enum Sexes {
+    ASEXUAL
+    FEMALE
+    HERMAPHRODITIC
+    MALE
+    OTHER
+}
+
+enum Skills {
+    COMBAT
+    CREATIVE
+    INTERNAL
+    MOVEMENT
+    OTHER
+    SOCIAL
+    UTILITY
+}
+
+enum Species {
+    ANIMALIA
+    AVIAN
+    FUNGI
+    HOMINID
+    HOMINID_DEUM
+    ICHTHYS
+    META_HOMINID
+    OTHER
+    PLANTAE
+    REPTILIAN
+    XENOBIOTIC
+}
+
+enum Stats {
+    MENTAL
+    PHYSICAL
+    SOCIAL
+}
+
+enum TechLevels {
+    BRONZE_AGE
+    FAR_FUTURE
+    INDUSTRIAL_AGE
+    INFORMATION_AGE
+    IRON_AGE
+    NEAR_FUTURE
+    PRE_INDUSTRIAL_AGE
+    PRE_SINGULARITY
+    SINGULARITY
+    STONE_AGE
+}
+
+enum Terrains {
+    AQUATIC
+    DESERT
+    DUNGEON
+    FORREST
+    INDOORS
+    LABYRINTH
+    LAKE
+    LUNAR
+    MOUNTAINS
+    OCEAN
+    PLAINS
+    RIVER
+    SEA
+    SKY
+    TUNDRA
+    URBAN
+    VOID
+}
+
+enum Worlds {
+    AQUATIC
+    DESERT
+    FLOATING
+    FOREST
+    HOLLOW
+    ICE
+    JUNGLE
+    LAVA
+    MAGICAL
+    SNOW
+    TERRAN
+}
+
+"""A slightly refined version of RFC-3339 compliant DateTime Scalar"""
+scalar DateTime
+
+input AttributeInput {
+    flavor: FlavorInput
+    id: String
+    name: String
+    prompt: String
+    type: Attributes!
+}
+
+input CharacteristicInput {
+    description: String
+    title: String!
+    value: Float!
+}
+
+input CreatureInput {
+    attributes: [PlayerAttributeInput]
+    dimensions: [DimensionInput]
+    effects: [PlayerEffectInput]
+    flavor: FlavorInput
+    id: String
+    inventory: InventoryInput
+    name: String!
+    profession: ProfessionInput
+    prompt: String
+    sex: Sexes
+    skills: [PlayerSkillInput]
+    stats: [PlayerStatInput]
+    type: Species!
+}
+
+input CurrencyInput {
+    flavor: FlavorInput
+    id: String
+    name: String!
+    prompt: String
+}
+
+input DimensionInput {
+    title: String!
+    unitType: String!
+    value: Float!
+}
+
+input EffectInput {
+    flavor: FlavorInput
+    id: String
+    name: String
+    prompt: String
+    type: Effects!
+}
+
+input Filter {
+    byField: String!
+    forValue: String!
+}
+
+input FlavorInput {
+    characteristics: [CharacteristicInput]
+    objectType: String
+    summary: String
+    target: String
+    title: String
+}
+
+input InventoryCurrencyInput {
+    currency: CurrencyInput!
+    value: Float!
+}
+
+input InventoryInput {
+    currencies: [InventoryCurrencyInput]
+    flavor: FlavorInput
+    id: String
+    items: [InventoryItemInput]
+    prompt: String
+}
+
+input InventoryItemInput {
+    item: ItemInput!
+    value: Float!
+}
+
+input ItemInput {
+    dimensions: [DimensionInput]
+    flavor: FlavorInput
+    id: String
+    name: String!
+    prompt: String
+}
+
+input NPCInput {
+    attributes: [PlayerAttributeInput]
+    dimensions: [DimensionInput]
+    effects: [PlayerEffectInput]
+    flavor: FlavorInput
+    id: String
+    inventory: InventoryInput
+    name: String
+    profession: ProfessionInput
+    prompt: String
+    race: RaceInput
+    sex: Sexes
+    skills: [PlayerSkillInput]
+    stats: [PlayerStatInput]
+    user: UserInput
+}
+
+input Options {
+    filters: [Filter]
+    limit: Int!
+    sortBy: String
+}
+
+input PlayerAttributeInput {
+    attribute: AttributeInput
+    value: Float!
+}
+
+input PlayerEffectInput {
+    effect: EffectInput!
+    value: Float!
+}
+
+input PlayerInput {
+    attributes: [PlayerAttributeInput]
+    dimensions: [DimensionInput]
+    effects: [PlayerEffectInput]
+    flavor: FlavorInput
+    id: String
+    inventory: InventoryInput
+    name: String
+    profession: ProfessionInput
+    prompt: String
+    race: RaceInput
+    sex: Sexes
+    skills: [PlayerSkillInput]
+    stats: [PlayerStatInput]
+    user: UserInput
+}
+
+input PlayerSkillInput {
+    skill: SkillInput!
+    value: Float!
+}
+
+input PlayerStatInput {
+    stat: StatInput!
+    value: Float!
+}
+
+input ProfessionInput {
+    attributes: [PlayerAttributeInput]
+    flavor: FlavorInput
+    id: String
+    name: String!
+    prompt: String
+    skills: [PlayerSkillInput]
+    stats: [PlayerStatInput]
+    type: Professions!
+}
+
+input RaceInput {
+    flavor: FlavorInput
+    id: String
+    name: String!
+    prompt: String
+    type: Species!
+}
+
+input SkillInput {
+    flavor: FlavorInput
+    id: String
+    name: String
+    prompt: String
+    type: Skills!
+}
+
+input StatInput {
+    flavor: FlavorInput
+    id: String
+    name: String
+    prompt: String
+    type: Stats!
+}
+
+input TerrainEffectInput {
+    effect: EffectInput!
+    value: Float!
+}
+
+input TerrainInput {
+    effects: [TerrainEffectInput]
+    flavor: FlavorInput
+    id: String
+    name: String!
+    prompt: String
+    type: String!
+}
+
+input TransactionInput {
+    currency: String!
+    flavor: FlavorInput
+    id: String
+    inventoryId: String
+    item: String
+    prompt: String
+}
+
+input UserInput {
+    email: String!
+    firstName: String!
+    flavor: FlavorInput
+    id: String
+    lastName: String!
+    prompt: String
+}
+
+input WorldInput {
+    flavor: FlavorInput
+    id: String
+    magicLevel: MagicLevels
+    name: String!
+    prompt: String
+    races: [RaceInput]
+    techLevel: TechLevels
+    terrains: [TerrainInput]
+    type: String!
+}

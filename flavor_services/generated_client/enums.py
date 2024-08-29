@@ -1,0 +1,192 @@
+from enum import Enum
+
+
+class Attributes(str, Enum):
+    ENERGY = "ENERGY"
+    HEALTH = "HEALTH"
+    MANA = "MANA"
+    OTHER = "OTHER"
+    SANITY = "SANITY"
+
+
+class Effects(str, Enum):
+    ATTRIBUTE = "ATTRIBUTE"
+    CHARACTERISTIC = "CHARACTERISTIC"
+    DIMENSION = "DIMENSION"
+    OTHER = "OTHER"
+    SKILL = "SKILL"
+    STAT = "STAT"
+    STATUS = "STATUS"
+
+
+class ErrorTypes(str, Enum):
+    FLAVOR = "FLAVOR"
+    GRAPHQL = "GRAPHQL"
+    INTERNAL = "INTERNAL"
+    MONGODB = "MONGODB"
+    OTHER = "OTHER"
+    WEB = "WEB"
+
+
+class Events(str, Enum):
+    CHARACTER = "CHARACTER"
+    COMBAT = "COMBAT"
+    DIALOG = "DIALOG"
+    ECONOMIC = "ECONOMIC"
+    PARTY_CHANGE = "PARTY_CHANGE"
+    POLITICAL = "POLITICAL"
+    TRANSACTION = "TRANSACTION"
+
+
+class MagicLevels(str, Enum):
+    HIGH_MAGIC = "HIGH_MAGIC"
+    INHERENT_MAGIC = "INHERENT_MAGIC"
+    LOW_MAGIC = "LOW_MAGIC"
+    MODERATE_MAGIC = "MODERATE_MAGIC"
+    NO_MAGIC = "NO_MAGIC"
+
+
+class Operations(str, Enum):
+    CREATE_MANY = "CREATE_MANY"
+    CREATE_ONE = "CREATE_ONE"
+    DELETE_BY_ID = "DELETE_BY_ID"
+    DELETE_BY_IDS = "DELETE_BY_IDS"
+    DELETE_ONE = "DELETE_ONE"
+    FIND_ALL_LIKE = "FIND_ALL_LIKE"
+    FIND_BY_ID = "FIND_BY_ID"
+    FIND_BY_IDS = "FIND_BY_IDS"
+    FIND_ONE_LIKE = "FIND_ONE_LIKE"
+    UPDATE_MANY = "UPDATE_MANY"
+    UPDATE_ONE = "UPDATE_ONE"
+
+
+class Professions(str, Enum):
+    COMBAT = "COMBAT"
+    MILITARY = "MILITARY"
+    OTHER = "OTHER"
+    POLITICAL = "POLITICAL"
+    RELIGIOUS = "RELIGIOUS"
+    UTILITY = "UTILITY"
+
+
+class Sexes(str, Enum):
+    ASEXUAL = "ASEXUAL"
+    FEMALE = "FEMALE"
+    HERMAPHRODITIC = "HERMAPHRODITIC"
+    MALE = "MALE"
+    OTHER = "OTHER"
+
+
+class Skills(str, Enum):
+    COMBAT = "COMBAT"
+    CREATIVE = "CREATIVE"
+    INTERNAL = "INTERNAL"
+    MOVEMENT = "MOVEMENT"
+    OTHER = "OTHER"
+    SOCIAL = "SOCIAL"
+    UTILITY = "UTILITY"
+
+
+class Species(str, Enum):
+    ANIMALIA = "ANIMALIA"
+    AVIAN = "AVIAN"
+    FUNGI = "FUNGI"
+    HOMINID = "HOMINID"
+    HOMINID_DEUM = "HOMINID_DEUM"
+    ICHTHYS = "ICHTHYS"
+    META_HOMINID = "META_HOMINID"
+    OTHER = "OTHER"
+    PLANTAE = "PLANTAE"
+    REPTILIAN = "REPTILIAN"
+    XENOBIOTIC = "XENOBIOTIC"
+
+
+class Stats(str, Enum):
+    MENTAL = "MENTAL"
+    PHYSICAL = "PHYSICAL"
+    SOCIAL = "SOCIAL"
+
+
+class Features(str, Enum):
+    HAIR = "HAIR"
+    EYE = "EYE"
+    NOSE = "NOSE"
+    POSTURE = "POSTURE"
+    PHYSIQUE = "PHYSIQUE"
+    MOUTH = "MOUTH"
+    SKIN = "SKIN"
+    NAILS = "NAILS"
+    CHIN = "CHIN"
+    BOSOM = "BOSOM"
+    BUTTOCKS = "BUTTOCKS"
+    LEGS = "LEGS"
+    HANDS = "HANDS"
+    ARMS = "ARMS"
+    FINGERS = "FINGERS"
+    TOES = "TOES"
+    OTHER = "OTHER"
+
+
+class Histories(str, Enum):
+    BACKGROUND = "BACKGROUND"
+    UPBRINGING = "UPBRINGING"
+    PAST = "PAST"
+    EVENT = "EVENT"
+    JOURNEY = "JOURNEY"
+    LORE = "LORE"
+    STORY = "STORY"
+    CULTURE = "CULTURE"
+    EXPERIENCE = "EXPERIENCE"
+    TRAUMA = "TRAUMA"
+    FEAR = "FEAR"
+    RIVAL = "RIVAL"
+    REGRET = "REGRET"
+    RECORD = "RECORD"
+    OTHER = "OTHER"
+
+
+class TechLevels(str, Enum):
+    BRONZE_AGE = "BRONZE_AGE"
+    FAR_FUTURE = "FAR_FUTURE"
+    INDUSTRIAL_AGE = "INDUSTRIAL_AGE"
+    INFORMATION_AGE = "INFORMATION_AGE"
+    IRON_AGE = "IRON_AGE"
+    NEAR_FUTURE = "NEAR_FUTURE"
+    PRE_INDUSTRIAL_AGE = "PRE_INDUSTRIAL_AGE"
+    PRE_SINGULARITY = "PRE_SINGULARITY"
+    SINGULARITY = "SINGULARITY"
+    STONE_AGE = "STONE_AGE"
+
+
+class Terrains(str, Enum):
+    AQUATIC = "AQUATIC"
+    DESERT = "DESERT"
+    DUNGEON = "DUNGEON"
+    FORREST = "FORREST"
+    INDOORS = "INDOORS"
+    LABYRINTH = "LABYRINTH"
+    LAKE = "LAKE"
+    LUNAR = "LUNAR"
+    MOUNTAINS = "MOUNTAINS"
+    OCEAN = "OCEAN"
+    PLAINS = "PLAINS"
+    RIVER = "RIVER"
+    SEA = "SEA"
+    SKY = "SKY"
+    TUNDRA = "TUNDRA"
+    URBAN = "URBAN"
+    VOID = "VOID"
+
+
+class Worlds(str, Enum):
+    AQUATIC = "AQUATIC"
+    DESERT = "DESERT"
+    FLOATING = "FLOATING"
+    FOREST = "FOREST"
+    HOLLOW = "HOLLOW"
+    ICE = "ICE"
+    JUNGLE = "JUNGLE"
+    LAVA = "LAVA"
+    MAGICAL = "MAGICAL"
+    SNOW = "SNOW"
+    TERRAN = "TERRAN"
