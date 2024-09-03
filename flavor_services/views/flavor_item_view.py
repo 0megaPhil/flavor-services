@@ -1,19 +1,14 @@
 from rest_framework.request import Request
 
-from flavor_services.generated_client.input_types import *
+from flavor_services.generated.services_models import *
 from flavor_services.views import FlavorApiView
 from flavor_services.views.flavor_factory import FlavorFactory
 
 
-class InventoryApiView(FlavorApiView):
+class ItemApiView(FlavorApiView):
 
     def __init__(self, **kwargs):
         super().__init__(FlavorFactory(ItemInput()), **kwargs)
-
-    def detail_entities(self, entity) -> List[CommonObject]:
-        details: List[CommonObject] = apply_details(entity.items, [])
-        details = apply_details(entity.currencies, details)
-        return details
 
     def post(self, request: Request):
         return self.post_resolver(request)

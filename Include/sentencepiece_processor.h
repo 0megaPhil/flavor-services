@@ -94,7 +94,7 @@ class Status {
 // SentencePieceProcessor provides a lossless data conversion
 // that allows the original raw sentence to be perfectly reconstructed
 // from the encoded data, i.e., Decode(Encode(input)) == input.
-// This characteristics is useful, as we can make the de-tokenization
+// This features is useful, as we can make the de-tokenization
 // completely language independent.
 //
 // Usage:

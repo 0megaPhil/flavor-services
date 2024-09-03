@@ -1,6 +1,6 @@
 from rest_framework.request import Request
 
-from flavor_services.generated_client.input_types import *
+from flavor_services.generated.services_models import *
 from flavor_services.views import FlavorFactory, FlavorApiView
 
 

@@ -18,18 +18,16 @@ from django.contrib import admin
 from django.urls import path
 
 from .views.flavor_attribute_view import AttributeApiView
-from .views.flavor_effect_view import EffectApiView
-from .views.flavor_player_view import PlayerApiView
-from .views.flavor_race_view import RaceApiView
-from .views.flavor_skill_view import SkillApiView
-from .views.flavor_stat_view import StatApiView
+from .views.flavor_currency_view import CurrencyApiView
+from .views.flavor_denizen_view import DenizenApiView
+from .views.flavor_inventory_view import InventoryApiView
+from .views.flavor_item_view import ItemApiView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('flavor/player', PlayerApiView.as_view()),
+    path('flavor/denizen', DenizenApiView.as_view()),
     path('flavor/attribute', AttributeApiView.as_view()),
-    path('flavor/effect', EffectApiView.as_view()),
-    path('flavor/race', RaceApiView.as_view()),
-    path('flavor/skill', SkillApiView.as_view()),
-    path('flavor/stat', StatApiView.as_view()),
+    path('flavor/inventory', InventoryApiView.as_view()),
+    path('flavor/item', ItemApiView.as_view()),
+    path('flavor/currency', CurrencyApiView.as_view()),
 ]
